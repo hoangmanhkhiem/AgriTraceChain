@@ -13,12 +13,13 @@ export default function DashboardPage() {
   const router = useRouter()
   const { isConnected, walletAddress, walletType, balance } = useWallet()
   const [mockProducts, setMockProducts] = useState([])
-
+  const [dataSize, setDataSize] = useState(0);
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await fetch("/api/products")
       const data = await response.json()
       setMockProducts(data)
+      setDataSize(data.length)
       console.log(data)
     }
     fetchProducts()
@@ -46,7 +47,7 @@ export default function DashboardPage() {
             <Package className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
+            <div className="text-2xl font-bold">{dataSize}</div>
             <p className="text-xs text-muted-foreground">+2 from last month</p>
           </CardContent>
         </Card>
@@ -76,7 +77,9 @@ export default function DashboardPage() {
             <Leaf className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{balance?.toFixed(2) || "0.00"} ₳</div>
+          <div className="text-2xl font-bold">
+            {balance ? balance : "0.00"} ₳
+          </div>
             <p className="text-xs text-muted-foreground">
               {walletAddress
                 ? `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)} Wallet`
@@ -108,7 +111,7 @@ export default function DashboardPage() {
                   <div className="text-right">Actions</div>
                 </div>
                 <div className="divide-y">
-                  {mockProducts.map((product) => (
+                  {mockProducts.map((product: any) => (
                     <div key={product._id} className="grid grid-cols-5 items-center p-4 text-sm">
                       <div className="font-medium">{product.name}</div>
                       <div>{product.type}</div>
