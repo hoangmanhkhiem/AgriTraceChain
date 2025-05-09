@@ -1,0 +1,219 @@
+{
+  "preamble": {
+    "title": "thomas/agritracechain",
+    "description": "Aiken contracts for project 'thomas/agritracechain'",
+    "version": "0.0.0",
+    "plutusVersion": "v3",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.1.0+be31a7c"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "agrtracechain.agritracechain.spend",
+      "datum": {
+        "title": "datum_otp",
+        "schema": {
+          "$ref": "#/definitions/agrtracechain~1Datum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/agrtracechain~1Redeemer"
+        }
+      },
+      "parameters": [
+        {
+          "title": "codeEncryption",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "idProduct",
+          "schema": {
+            "$ref": "#/definitions/Int"
+          }
+        },
+        {
+          "title": "receiverConfirm",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        },
+        {
+          "title": "price",
+          "schema": {
+            "$ref": "#/definitions/Int"
+          }
+        }
+      ],
+      "compiledCode": "5901330101003232323232322322322322322533300a3232323232533300f3370e900118081baa001132323253330123370e900018099baa0051323253330173019002153330143370e9000180a9baa003132323253330173371e9110d557064617465486973746f727900375c600460326ea802854ccc05c0044cdc78089bae301b301c30193754006294058cc88c8cc00400400c894ccc074004528099299980d99b8f375c603e00400829444cc00c00c004c07c004dd6180d180d980d980d980d980d980d980d980d980c1baa00b375c600260306ea80088c068004c060c058dd50018b0b1bae30170013014375400a2c602a602c004602800260226ea800458c048c04c008c044004c044008c03c004c030dd50008a4c26cac6eb4004dd70009bad001375c002ae6955ceaab9e5573eae855d101",
+      "hash": "5538c333d688c37fa1326e848bd2919cc6d1e40b3f3889f0116f7f8a"
+    },
+    {
+      "title": "agrtracechain.agritracechain.else",
+      "parameters": [
+        {
+          "title": "codeEncryption",
+          "schema": {
+            "$ref": "#/definitions/ByteArray"
+          }
+        },
+        {
+          "title": "idProduct",
+          "schema": {
+            "$ref": "#/definitions/Int"
+          }
+        },
+        {
+          "title": "receiverConfirm",
+          "schema": {
+            "$ref": "#/definitions/VerificationKeyHash"
+          }
+        },
+        {
+          "title": "price",
+          "schema": {
+            "$ref": "#/definitions/Int"
+          }
+        }
+      ],
+      "compiledCode": "5901330101003232323232322322322322322533300a3232323232533300f3370e900118081baa001132323253330123370e900018099baa0051323253330173019002153330143370e9000180a9baa003132323253330173371e9110d557064617465486973746f727900375c600460326ea802854ccc05c0044cdc78089bae301b301c30193754006294058cc88c8cc00400400c894ccc074004528099299980d99b8f375c603e00400829444cc00c00c004c07c004dd6180d180d980d980d980d980d980d980d980d980c1baa00b375c600260306ea80088c068004c060c058dd50018b0b1bae30170013014375400a2c602a602c004602800260226ea800458c048c04c008c044004c044008c03c004c030dd50008a4c26cac6eb4004dd70009bad001375c002ae6955ceaab9e5573eae855d101",
+      "hash": "5538c333d688c37fa1326e848bd2919cc6d1e40b3f3889f0116f7f8a"
+    },
+    {
+      "title": "payment.payment.spend",
+      "datum": {
+        "title": "datum_otp",
+        "schema": {
+          "$ref": "#/definitions/payment~1PaymentDatum"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/payment~1Redeemer"
+        }
+      },
+      "compiledCode": "59013001010032323232323225333002323232323253330073370e900118041baa0011323232533300a3370e900018059baa00513232533300f30110021533300c3370e900018069baa00313232323232323253330133371e91106726566756e64000011003153330133371e9101076765745061696400001100216375c600860286ea8034cc008010dd7180a980b18099baa00533001003375c600460246ea801088c8cc00400400c894ccc058004528099299980a19b8f375c603000400829444cc00c00c004c0600048c04c004dd618089809180918091809180918091809180918079baa00a3010300e37540062c2c6eb8c03c004c030dd50028b18069807001180600098049baa00116300a300b0023009001300900230070013004375400229309b2b2b9a5573aaae7955cfaba157441",
+      "hash": "d695810b5c9605c76d23038110ee289782ba3c3ec2fafc3ff05e347f"
+    },
+    {
+      "title": "payment.payment.else",
+      "compiledCode": "59013001010032323232323225333002323232323253330073370e900118041baa0011323232533300a3370e900018059baa00513232533300f30110021533300c3370e900018069baa00313232323232323253330133371e91106726566756e64000011003153330133371e9101076765745061696400001100216375c600860286ea8034cc008010dd7180a980b18099baa00533001003375c600460246ea801088c8cc00400400c894ccc058004528099299980a19b8f375c603000400829444cc00c00c004c0600048c04c004dd618089809180918091809180918091809180918079baa00a3010300e37540062c2c6eb8c03c004c030dd50028b18069807001180600098049baa00116300a300b0023009001300900230070013004375400229309b2b2b9a5573aaae7955cfaba157441",
+      "hash": "d695810b5c9605c76d23038110ee289782ba3c3ec2fafc3ff05e347f"
+    }
+  ],
+  "definitions": {
+    "ByteArray": {
+      "dataType": "bytes"
+    },
+    "Int": {
+      "dataType": "integer"
+    },
+    "VerificationKeyHash": {
+      "title": "VerificationKeyHash",
+      "dataType": "bytes"
+    },
+    "agrtracechain/Datum": {
+      "title": "Datum",
+      "anyOf": [
+        {
+          "title": "Datum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "current_handler",
+              "$ref": "#/definitions/VerificationKeyHash"
+            },
+            {
+              "title": "receiver",
+              "$ref": "#/definitions/VerificationKeyHash"
+            },
+            {
+              "title": "data",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "agrtracechain/Redeemer": {
+      "title": "Redeemer",
+      "anyOf": [
+        {
+          "title": "Redeemer",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "action",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    },
+    "payment/PaymentDatum": {
+      "title": "PaymentDatum",
+      "anyOf": [
+        {
+          "title": "PaymentDatum",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "buyer",
+              "$ref": "#/definitions/VerificationKeyHash"
+            },
+            {
+              "title": "shopper",
+              "$ref": "#/definitions/VerificationKeyHash"
+            },
+            {
+              "title": "product_id",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "product_name",
+              "$ref": "#/definitions/ByteArray"
+            },
+            {
+              "title": "timeExpire",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "is_paid",
+              "$ref": "#/definitions/Int"
+            },
+            {
+              "title": "price",
+              "$ref": "#/definitions/Int"
+            }
+          ]
+        }
+      ]
+    },
+    "payment/Redeemer": {
+      "title": "Redeemer",
+      "anyOf": [
+        {
+          "title": "Redeemer",
+          "dataType": "constructor",
+          "index": 0,
+          "fields": [
+            {
+              "title": "action",
+              "$ref": "#/definitions/ByteArray"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
