@@ -52,7 +52,6 @@ export async function GET(request: Request) {
   return NextResponse.json(products);
 }
 
-
 export async function POST(request: Request) {
   try {
     const productData = await request.json()
