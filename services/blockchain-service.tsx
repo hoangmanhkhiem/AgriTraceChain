@@ -1,9 +1,23 @@
 "use client"
 
+import React from "react"
 import { toast } from "@/components/ui/use-toast"
+import * as bip39 from "bip39";
+import { decrypt, encrypt } from "@/utils/crypto";
+import {
+  BlockfrostProvider,
+  MeshTxBuilder,
+  MeshWallet,
+  serializePlutusScript,
+  UTxO,
+  deserializeDatum,
+  BrowserWallet,
+  deserializeAddress
 
+} from "@meshsdk/core";
 // This is a mock service that simulates blockchain interactions
 // In a real implementation, this would use Cardano SDK libraries
+export const blockchainProvider = new BlockfrostProvider('preprod2DQWsQjqnzLW9swoBQujfKBIFyYILBiL');
 
 export type ProductData = {
   id?: string
@@ -56,29 +70,47 @@ class BlockchainService {
   }
 
   // Register a new product on the blockchain
-  async registerProduct(
-    productData: ProductData,
-    walletAddress: string,
-  ): Promise<{ txHash: string; productId: string }> {
+  async registerProduct(): Promise<{ mnemonic: string[] }> {
     try {
-      console.log("Registering product on blockchain:", productData)
-      // In a real implementation, this would create a transaction using the Cardano SDK
-      // and submit it to the blockchain using the product-registration.ak contract
+      // Tạo 24 từ khóa mnemonic (entropy 256 bits)
+      const mnemonic = bip39.generateMnemonic(256); // 24 từ
+      // const mnemonic = MeshWallet.brew();
+      // console.log(mnemonic)
+      // Convert mnemonic to string
+      const mnemonicString = mnemonic.toString();
+      console.log(mnemonicString)
+      const mnemonicWords = mnemonicString.split(" ");
+      // Convert mnemonicWords to string[]
+      const mnemonicWordsArray = mnemonicWords.map(word => word.trim());
 
-      // Simulate blockchain transaction delay
-      await new Promise((resolve) => setTimeout(resolve, 2000))
+      console.log("🌐 Ví mới đã được tạo:");
+      console.log("🧠 24 từ khóa bảo mật (mnemonic):", mnemonicWords.join(" "));
 
-      // Generate mock transaction hash and product ID
-      const txHash = `tx_${Math.random().toString(36).substring(2, 10)}${Math.random().toString(36).substring(2, 10)}`
-      const productId = `prod_${Math.random().toString(36).substring(2, 6)}`
+      const encryptedMnemonic = encrypt(mnemonicString);
+      console.log("🧠 24 từ khóa bảo mật (mnemonic):", encryptedMnemonic);
+
+      const decryptedMnemonic = decrypt(encryptedMnemonic);
+      console.log("🧠 24 từ khóa bảo mật (mnemonic):", decryptedMnemonic);  
+      const walletA = new MeshWallet({
+          networkId: 0,
+          fetcher: blockchainProvider, 
+          submitter: blockchainProvider, 
+          key: {
+              type: 'mnemonic', 
+              words: mnemonicWordsArray,
+          },
+      });
+
+      // Lay dia chi
+      const changeAddress = await walletA.getChangeAddress();
+      console.log("🌐 Địa chỉ ví mới:", changeAddress); 
 
       return {
-        txHash,
-        productId,
-      }
+        mnemonic: mnemonicWords,
+      };
     } catch (error) {
-      console.error("Error registering product:", error)
-      throw new Error("Failed to register product on blockchain")
+      console.error("❌ Lỗi khi tạo ví mới:", error);
+      throw new Error("Không thể tạo ví mới");
     }
   }
 
@@ -244,7 +276,7 @@ class BlockchainService {
               </p>
             )}
           </div>
-        ),
+        )
       })
     } else if (type === "error") {
       toast({
