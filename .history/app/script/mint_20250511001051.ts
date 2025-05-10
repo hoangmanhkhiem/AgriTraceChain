@@ -11,10 +11,12 @@ import {
     serializeAddressObj,
     serializePlutusScript,
     scriptAddress,
-    BrowserWallet
+    BrowserWallet,
+    IWallet
   } from "@meshsdk/core";
   import plutus from './plutus.json';
-  import {wallet, getWalletInfoForTx, blockchainProvider } from './common';
+  import {getWalletInfoForTx,  blockchainProvider } from './common'
+
   const PLATFORM_FEE = '1000000';
   const DEFAULT_EXCHANGE_ADDRESS = "addr_test1qqwkave5e46pelgysvg6mx0st5zhte7gn79srscs8wv2qp5qkfvca3f7kpx3v3rssm4j97f63v5whrj8yvsx6dac9xrqyqqef6";
   function readValidator(title: string): string {
@@ -25,7 +27,7 @@ import {
   
   
   export async function mintNFT(
-    wallet: any, 
+    wallet: IWallet, 
     tokenName: string,
     metadata: any,
     options?: {
@@ -124,7 +126,7 @@ import {
           collateral.output.amount, 
           collateral.output.address
         )
-        .setNetwork("preprod")
+        .setNetwork("preview")
         .addUtxosFromSelection();
 
       const completedTx = await unsignedTx.complete();
@@ -140,5 +142,3 @@ import {
       throw error;
     }
   }
-  
-  

@@ -1,17 +1,16 @@
 import {
+    applyParamsToScript,
     BlockfrostProvider,
+    BrowserWallet,
     MeshTxBuilder,
     MeshWallet,
     PlutusScript,
     serializePlutusScript,
-    UTxO
-    ,resolvePlutusScriptAddress
+    UTxO,
+    IWallet
   } from "@meshsdk/core";
-  import { applyParamsToScript } from "@meshsdk/core-csl";
   import blueprint from "./plutus.json";
-  import { Script } from "node:vm";
-   
-  export const blockchainProvider = new BlockfrostProvider('preprod2DQWsQjqnzLW9swoBQujfKBIFyYILBiL');
+  export const blockchainProvider = new BlockfrostProvider('preview5ouu6LagZMxUWaFR1khZNICSRzigoGmz');
    
   // wallet for signing transactions
   export const wallet = new MeshWallet({
@@ -65,15 +64,16 @@ import {
     return utxos[0];
   }
   
-  
-  
-  export async function getWalletInfoForTx(wallet: any) {
+export async function getWalletInfoForTx(wallet: IWallet) {
+  console.log("A:", wallet);
+    const walletAddress = await wallet.;
+    
     const utxos = await wallet.getUtxos();
-    const walletAddress = (await wallet.getUsedAddresses())[0];
     const collateral = (await wallet.getCollateral())[0];
     return { utxos, walletAddress, collateral };
   }
-  export async function getUtxoForTx(address: string, txHash: string, wallet: any){
+
+  export async function getUtxoForTx(address: string, txHash: string, wallet: BrowserWallet){
     const utxos: UTxO[] = await blockchainProvider.fetchAddressUTxOs(address);
     const utxo = utxos.find(function (utxo: UTxO) {
       return utxo.input.txHash === txHash;
@@ -87,3 +87,4 @@ import {
     const utxos = await blockchainProvider.fetchAddressUTxOs(address, unit);
     return utxos[utxos.length - 1];
   };
+  //export default {getWalletInfoForTx, blockchainProvider};

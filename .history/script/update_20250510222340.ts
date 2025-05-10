@@ -180,7 +180,7 @@ export async function updateTokens(
       collateral.output.amount,
       collateral.output.address
     )
-    .setNetwork("preprod");
+    .setNetwork("preview");
   const completedTx = await unsignedTx.complete();
   const signedTx = await wallet.signTx(completedTx, true);
   try {
