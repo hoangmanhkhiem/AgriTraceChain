@@ -149,7 +149,7 @@ export default function Register() {
       )
 
       // Redirect to dashboard or home page after successful registration
-      router.push("/dashboard")
+      router.push("/farm/dashboard")
     } catch (error) {
       console.error("Failed to submit user information:", error)
       alert("Failed to submit user information. Please try again.")
