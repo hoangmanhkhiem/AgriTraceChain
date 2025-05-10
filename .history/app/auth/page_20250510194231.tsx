@@ -87,9 +87,7 @@ export default function Register() {
             })
 
             if (response.status === 200) {
-               const tien = await wallet.getBalance()
-          localStorage.setItem("balance", tien)
-          connectWallet("lace", walletAddress)
+              
                 // Redirect to farm page if already registered
                 router.push("/farm/dashboard")
                 return

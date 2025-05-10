@@ -23,7 +23,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Button asChild size="lg">
-                  <Link href="/auth">Get Started</Link>
+                  <Link href="/connect-wallet">Get Started</Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
                   <Link href="/scan">
