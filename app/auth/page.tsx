@@ -87,17 +87,24 @@ export default function Register() {
             })
 
             if (response.status === 200) {
+                const tien = await wallet.getBalance()
+                localStorage.setItem("balance", tien)
+
+                // Set the access token and mark signature as verified
+                connectWallet("lace", walletAddress);
                 // Redirect to farm page if already registered
-                router.push("/dashboard")
+                router.push("farm/dashboard")
                 return
             }
           } catch (error) {
             console.log("OKE");
           }
+
           const tien = await wallet.getBalance()
           localStorage.setItem("balance", tien)
 
           // Set the access token and mark signature as verified
+          connectWallet("lace", walletAddress);
           setAccessToken(accessToken)
           setSignatureVerified(true)
         } catch (error) {
